@@ -2,8 +2,8 @@
     "manifest_version": 2,
 
     "name": "Phocus",
-    "description: "To help out with focus",
-    "version": 1.0,
+    "description": "To help out with focus",
+    "version": "1.0",
    
     "browser_action": {
         "default_icon": "icon.png",

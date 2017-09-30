@@ -4,7 +4,22 @@
     "name": "Phocus",
     "description": "To help out with focus",
     "version": "1.0",
-   
+    
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "css": [
+                "content.css"
+            ]
+        }
+    ],
+
     "browser_action": {
         "default_icon": "icon.png",
         "default_popup": "popup.html"

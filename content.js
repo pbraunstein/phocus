@@ -1,23 +1,38 @@
-console.log("hi all");
+WEBSITES_TO_BLOCK = [
+    'thehill.com',
+    'facebook.com',
+    'cnn.com',
+    'washingtonpost.com',
+    'nytimes.com',
+    'wsj.com',
+    'xkcd',
+    'www.realclearpolitics.com',
+    'foxnews.com',
+    'vox.com',
+    'youtube.com',
+    'twitter.com'
+]
 
 function main() {
-    if !shoudlBlock() {
+    if (!shouldBlock()) {
         return;
     }
 
-    var div = document.createElement('div');
+    let div = document.createElement('div');
     document.body.appendChild(div);
     div.className += ' block';
 
-    window.addEventListener('load', function() {alert("are you sure you want to be here?");});
+//    window.addEventListener('load', function() {alert("are you sure you want to be here?");});
 }
 
 function shouldBlock() {
-    if location.href.includes('thehill.com') {
-        return true;
-    } else {
-        return false;
+    let currentWebsite = location.href;
+    for (let website of WEBSITES_TO_BLOCK) {
+        if (currentWebsite.includes(website)) {
+            return true;
+        }
     }
+    return false;
 }
 
 main();

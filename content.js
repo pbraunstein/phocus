@@ -1,7 +1,24 @@
 console.log("hi all");
-//alert("the website is:" + location.href);
-var div = document.createElement('div');
-document.body.appendChild(div);
-div.className += ' fadeMe';
-window.addEventListener('load', function() {alert("are you sure you want to be here?");});
+
+function main() {
+    if !shoudlBlock() {
+        return;
+    }
+
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+    div.className += ' block';
+
+    window.addEventListener('load', function() {alert("are you sure you want to be here?");});
+}
+
+function shouldBlock() {
+    if location.href.includes('thehill.com') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+main();
 

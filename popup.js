@@ -1,10 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("I am here")
-    var button = document.getElementById('alertButton');
-    button.addEventListener('click', function () {
-        alert("Hello! This looks like a distracting webpage");
-    });
+    document.querySelector('#activatedCheckbox').addEventListener('change',
+        function () {
+            if (activatedCheckbox.checked) {
+                console.log('beep!');
+            } else {
+                console.log('boop!');
+            }
+        }
+    );
+    chrome.storage.sync.set({'active': 'true'});
 });
-
-console.log("HIHIHIHIIHIHIHIh");
 

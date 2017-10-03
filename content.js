@@ -15,7 +15,6 @@ WEBSITES_TO_BLOCK = [
 
 function main() {
     chrome.storage.sync.get('active', (items) => {
-        console.log("hiiii" + items.active);
         if (!items.active) {
             return;
         }

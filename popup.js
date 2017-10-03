@@ -3,11 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
         function () {
             if (activatedCheckbox.checked) {
                 console.log('beep!');
+                chrome.storage.sync.set({'active': true});
             } else {
                 console.log('boop!');
+                chrome.storage.sync.set({'active': false});
             }
         }
     );
-    chrome.storage.sync.set({'active': 'true'});
+    getIsActivated();
 });
 
+function getIsActivated() {
+    chrome.storage.sync.get('active', (items) => {
+        console.log("just logged items");
+        console.log(items);
+    });
+}

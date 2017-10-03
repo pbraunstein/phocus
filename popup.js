@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#activatedCheckbox').addEventListener('change',
+    initialize();
+});
+
+function initialize() {
+    // initialize click listener
+    getCheckbox().addEventListener('change',
         function () {
             if (activatedCheckbox.checked) {
                 console.log('beep!');
@@ -10,12 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     );
-    getIsActivated();
-});
+    initializeCheckBoxState();
+}
 
-function getIsActivated() {
+function initializeCheckBoxState() {
     chrome.storage.sync.get('active', (items) => {
-        console.log("just logged items");
-        console.log(items);
+        console.log(items.active);
+        getCheckbox().checked = items.active;
     });
+}
+
+function getCheckbox() {
+    return document.querySelector('#activatedCheckbox');
 }

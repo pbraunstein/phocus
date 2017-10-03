@@ -14,25 +14,21 @@ WEBSITES_TO_BLOCK = [
 ]
 
 function main() {
-    if (!shouldBlock()) {
-        return;
-    }
-
-    let div = document.createElement('div');
-    document.body.appendChild(div);
-    div.className += ' block';
-
-//    window.addEventListener('load', function() {alert("are you sure you want to be here?");});
-}
-
-function shouldBlock() {
-    let currentWebsite = location.href;
-    for (let website of WEBSITES_TO_BLOCK) {
-        if (currentWebsite.includes(website)) {
-            return true;
+    chrome.storage.sync.get('active', (items) => {
+        console.log("hiiii" + items.active);
+        if (!items.active) {
+            return;
         }
-    }
-    return false;
+        let currentWebsite = location.href;
+        for (let website of WEBSITES_TO_BLOCK) {
+            if (currentWebsite.includes(website)) {
+                let div = document.createElement('div');
+                document.body.appendChild(div);
+                div.className += ' block';
+            }
+        }
+    });
+
 }
 
 main();

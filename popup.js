@@ -1,3 +1,19 @@
+WEBSITES_TO_BLOCK = [
+    'thehill.com',
+    'facebook.com',
+    'cnn.com',
+    'washingtonpost.com',
+    'nytimes.com',
+    'wsj.com',
+    'xkcd',
+    'www.realclearpolitics.com',
+    'foxnews.com',
+    'vox.com',
+    'youtube.com',
+    'twitter.com',
+    'espn.com'
+]
+
 document.addEventListener('DOMContentLoaded', () => {
     initialize();
 });
@@ -15,7 +31,14 @@ function initialize() {
             }
         }
     );
+
+    // checkbox should display accurate state
     initializeCheckBoxState();
+
+    // initialize list
+    for (let website of WEBSITES_TO_BLOCK) {
+        addWebsite(website);
+    }
 }
 
 function initializeCheckBoxState() {
@@ -25,6 +48,18 @@ function initializeCheckBoxState() {
     });
 }
 
+function addWebsite(website) {
+    let ul = getList();
+    let li = document.createElement('li');
+    li.appendChild(document.createTextNode(website));
+    ul.appendChild(li);
+}
+
 function getCheckbox() {
     return document.querySelector('#activatedCheckbox');
 }
+
+function getList() {
+    return document.querySelector('#websiteList');
+}
+

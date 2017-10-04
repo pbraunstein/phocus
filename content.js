@@ -11,7 +11,7 @@ WEBSITES_TO_BLOCK = [
     'vox.com',
     'youtube.com',
     'twitter.com',
-    'espn'
+    'espn.com'
 ]
 
 function main() {

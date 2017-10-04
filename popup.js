@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     initialize();
-    chrome.storage.sync.get(null, (items) => console.log(items));
 });
 
 function initialize() {
@@ -17,8 +16,8 @@ function initialize() {
         }
     );
 
-    // checkbox should display accurate state
-    initializeCheckBoxState();
+    // pull from storage
+    pullFromStorage();
 
     // initialize text box and button
     getSubmit().addEventListener('click',
@@ -27,19 +26,21 @@ function initialize() {
         });
 }
 
-function initializeCheckBoxState() {
-    chrome.storage.sync.get('active', (items) => {
-        console.log(items.active);
+function pullFromStorage() {
+    chrome.storage.sync.get(null, (items) => {
+        console.log(items);
         getCheckbox().checked = items.active;
     });
 }
 
 function addWebsite(website) {
-    chrome.storage.sync.set({'website': website});
-//    let ul = getList();
-//    let li = document.createElement('li');
-//    li.appendChild(document.createTextNode(website));
-//    ul.appendChild(li);
+    chrome.storage.sync.get('websites', function(items) {
+        if (items.websites === null || items.websites.constructor !== Array) {
+            items.websites = [];
+        }
+        items.websites.push(website)
+        chrome.storage.sync.set({'websites': items.websites});
+    });
 }
 
 function getCheckbox() {

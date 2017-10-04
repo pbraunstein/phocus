@@ -24,6 +24,12 @@ function initialize() {
         function () {
             addWebsite(getTextBox().value);
         });
+
+    // initialize clear all button
+    getClearAll().addEventListener('click',
+        function () {
+            chrome.storage.sync.clear();
+        });
 }
 
 function pullFromStorage() {
@@ -57,4 +63,8 @@ function getTextBox() {
 
 function getSubmit() {
     return document.querySelector('#entrySubmit');
+}
+
+function getClearAll() {
+    return document.querySelector('#clearAll');
 }

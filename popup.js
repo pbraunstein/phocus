@@ -41,7 +41,7 @@ function pullFromStorage() {
 
 function addWebsite(website) {
     chrome.storage.sync.get('websites', function(items) {
-        if (items.websites === null || items.websites.constructor !== Array) {
+        if (Object.keys(items).length === 0 || items.websites.constructor !== Array) {
             items.websites = [];
         }
         items.websites.push(website)

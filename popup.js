@@ -19,7 +19,8 @@ function initialize() {
 
     // initialize text box and button
     getSubmit().addEventListener('click',
-        function () {
+        function (e) {
+            e.preventDefault();  // prevent page from rerendering
             addWebsite(getTextBox().value);
         });
 
@@ -37,6 +38,7 @@ function pullFromStorage() {
 }
 
 function addWebsite(website) {
+    // store the website
     chrome.storage.sync.get('websites', function(items) {
         if (Object.keys(items).length === 0 || items.websites.constructor !== Array) {
             items.websites = [];
@@ -44,6 +46,12 @@ function addWebsite(website) {
         items.websites.push(website)
         chrome.storage.sync.set({'websites': items.websites});
     });
+
+    // display the name of the blocked website
+    let websiteList = getList();
+    let newElement = document.createElement('li');
+    newElement.appendChild(document.createTextNode(website));
+    websiteList.appendChild(newElement);
 }
 
 function getCheckbox() {

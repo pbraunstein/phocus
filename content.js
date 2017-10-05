@@ -1,26 +1,14 @@
-WEBSITES_TO_BLOCK = [
-    'thehill.com',
-    'facebook.com',
-    'cnn.com',
-    'washingtonpost.com',
-    'nytimes.com',
-    'wsj.com',
-    'xkcd',
-    'www.realclearpolitics.com',
-    'foxnews.com',
-    'vox.com',
-    'youtube.com',
-    'twitter.com',
-    'espn.com'
-]
-
 function main() {
-    chrome.storage.sync.get('active', (items) => {
+    chrome.storage.sync.get(null, (items) => {
+        console.log(items);
         if (!items.active) {
+            console.log('early return');
             return;
         }
+        websites_to_block = items.websites;
+        console.log(websites_to_block);
         let currentWebsite = location.href;
-        for (let website of WEBSITES_TO_BLOCK) {
+        for (let website of websites_to_block) {
             if (currentWebsite.includes(website)) {
                 let div = document.createElement('div');
                 document.body.appendChild(div);

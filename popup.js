@@ -7,10 +7,8 @@ function initialize() {
     getCheckbox().addEventListener('change',
         function () {
             if (activatedCheckbox.checked) {
-                console.log('beep!');
                 chrome.storage.sync.set({'active': true});
             } else {
-                console.log('boop!');
                 chrome.storage.sync.set({'active': false});
             }
         }
@@ -34,7 +32,6 @@ function initialize() {
 
 function pullFromStorage() {
     chrome.storage.sync.get(null, (items) => {
-        console.log(items);
         getCheckbox().checked = items.active;
     });
 }

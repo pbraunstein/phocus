@@ -28,6 +28,10 @@ function initialize() {
     getClearAll().addEventListener('click',
         function () {
             chrome.storage.sync.clear();
+            let ul = getList();
+            while (ul.lastChild) {
+               ul.removeChild(ul.lastChild);
+            }
         });
 }
 

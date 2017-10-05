@@ -10,13 +10,18 @@ function main() {
         let currentWebsite = location.href;
         for (let website of websites_to_block) {
             if (currentWebsite.includes(website)) {
-                let div = document.createElement('div');
-                document.body.appendChild(div);
-                div.className += ' block';
+                blockWebsite();
+                return;  // no need to look at the other sites
             }
         }
     });
 
+}
+
+function blockWebsite() {
+    let div = document.createElement('div');
+    document.body.appendChild(div);
+    div.className += ' block';
 }
 
 main();

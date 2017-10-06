@@ -22,9 +22,12 @@ function initialize() {
         function (e) {
             e.preventDefault();  // prevent page from rerendering
             addWebsite(getTextBox().value);
+            // TODO: Clear text entry box
+            // TODO: Close suggestion box on clear
         });
 
     // initialize clear all button
+    // TODO: Add functionality to individually delete sites
     getClearAll().addEventListener('click',
         function () {
             chrome.storage.sync.clear();
@@ -37,7 +40,11 @@ function initialize() {
 
 function pullFromStorage() {
     chrome.storage.sync.get(null, (items) => {
+        console.log(items);
         getCheckbox().checked = items.active;
+        for (site of items.websites) {
+            displayBlockedSite(site);
+        }
     });
 }
 
@@ -50,8 +57,10 @@ function addWebsite(website) {
         items.websites.push(website)
         chrome.storage.sync.set({'websites': items.websites});
     });
+    displayBlockedSite(website);
+}
 
-    // display the name of the blocked website
+function displayBlockedSite(website) {
     let websiteList = getList();
     let newElement = document.createElement('li');
     newElement.appendChild(document.createTextNode(website));

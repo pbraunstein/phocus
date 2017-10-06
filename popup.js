@@ -22,8 +22,7 @@ function initialize() {
         function (e) {
             e.preventDefault();  // prevent page from rerendering
             addWebsite(getTextBox().value);
-            // TODO: Clear text entry box
-            // TODO: Close suggestion box on clear
+            getTextBox().value = '';
         });
 
     // initialize clear all button
@@ -50,6 +49,7 @@ function pullFromStorage() {
 
 function addWebsite(website) {
     // store the website
+    // TODO: handle duplicates
     chrome.storage.sync.get('websites', function(items) {
         if (Object.keys(items).length === 0 || items.websites.constructor !== Array) {
             items.websites = [];

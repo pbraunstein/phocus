@@ -65,6 +65,14 @@ function displayBlockedSite(website) {
     let newElement = document.createElement('li');
     newElement.appendChild(document.createTextNode(website));
     websiteList.appendChild(newElement);
+
+    // add double click listener to remove self
+    // TODO: write to storage to no longer store this element
+    newElement.addEventListener(
+            'dblclick',
+            (event) => {
+                event.target.parentNode.removeChild(event.target);
+            });
 }
 
 function getCheckbox() {

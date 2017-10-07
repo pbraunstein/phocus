@@ -26,7 +26,6 @@ function initialize() {
         });
 
     // initialize clear all button
-    // TODO: Add functionality to individually delete sites
     getClearAll().addEventListener('click',
         function () {
             chrome.storage.sync.clear();
@@ -67,7 +66,6 @@ function displayBlockedSite(website) {
     websiteList.appendChild(newElement);
 
     // add double click listener to remove self
-    // TODO: write to storage to no longer store this element
     newElement.addEventListener(
             'dblclick',
             (event) => {

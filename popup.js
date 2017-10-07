@@ -48,15 +48,22 @@ function pullFromStorage() {
 
 function addWebsite(website) {
     // store the website
-    // TODO: handle duplicates
     chrome.storage.sync.get('websites', function(items) {
         if (Object.keys(items).length === 0 || items.websites.constructor !== Array) {
             items.websites = [];
         }
+
+        // duplicate detection
+        for (site of items.websites) {
+            if (site === website) {
+                return;
+            }
+        }
         items.websites.push(website)
         chrome.storage.sync.set({'websites': items.websites});
+
+        displayBlockedSite(website);
     });
-    displayBlockedSite(website);
 }
 
 function displayBlockedSite(website) {

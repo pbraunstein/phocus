@@ -78,8 +78,6 @@ function displayBlockedSite(website) {
 
 function unblockWebsite(website) {
     chrome.storage.sync.get('websites', function(items) {
-        console.log(items);
-        console.log("above");
         if (Object.keys(items).length === 0 || items.websites.constructor !== Array) {
             return;  // data not valid - don't do anything
         }
@@ -90,7 +88,6 @@ function unblockWebsite(website) {
                 newBlockedList.push(site);
             }
         }
-        console.log(newBlockedList +  'aorsten');
         chrome.storage.sync.set({'websites': newBlockedList});
     });
 }

@@ -52,17 +52,33 @@ function addWebsite(website) {
             items.websites = [];
         }
 
-        // duplicate detection
-        for (site of items.websites) {
-            if (site === website) {
-                return;
-            }
+        if (!websiteValid(website, items)) {
+            return;
         }
+
         items.websites.push(website)
         chrome.storage.sync.set({'websites': items.websites});
 
         displayBlockedSite(website);
     });
+}
+
+function websiteValid(website, items) {
+    // has tld
+    if (!website.includes('.com')) {
+        console.log('block');
+        return false;
+    }
+
+    // duplicate detection
+    for (site of items.websites) {
+        if (site === website) {
+            console.log('block2');
+            return false;
+        }
+    }
+
+    return true;
 }
 
 function displayBlockedSite(website) {

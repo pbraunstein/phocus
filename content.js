@@ -1,5 +1,9 @@
 function main() {
     chrome.storage.sync.get(null, (items) => {
+        // if something is wrong -- make no modifications to the page
+        if (chrome.runtime.lastError || items === null) {
+            return;
+        }
         if (!items.active) {
             return;
         }

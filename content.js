@@ -4,6 +4,7 @@ function main() {
         if (chrome.runtime.lastError || items === null) {
             return;
         }
+
         if (!items.active) {
             return;
         }
@@ -16,13 +17,12 @@ function main() {
             }
         }
     });
-
 }
 
 function blockWebsite() {
     let div = document.createElement('div');
     document.body.appendChild(div);
-    div.className += ' block';
+    div.className += ' blockPhocus';
 }
 
 main();

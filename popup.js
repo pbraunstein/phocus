@@ -39,6 +39,9 @@ function initialize() {
 function pullFromStorage() {
     chrome.storage.sync.get(null, (items) => {
         getCheckbox().checked = items.active;
+        if (items.websites == null) {  // nothing to block
+            return;
+        }
         for (site of items.websites) {
             displayBlockedSite(site);
         }

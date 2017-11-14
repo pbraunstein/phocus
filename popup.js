@@ -84,9 +84,16 @@ function websiteValid(website, items) {
 
 function displayBlockedSite(website) {
     let websiteList = getList();
+    let l = websiteList.getElementsByTagName("li");
+    let m = [];
+    for (x of l) {
+        m.push(x.firstChild.data);
+    }
+    pos = getPosition(website, m);
+
     let newElement = document.createElement('li');
     newElement.appendChild(document.createTextNode(website));
-    websiteList.appendChild(newElement);
+    websiteList.insertBefore(newElement, websiteList.childNodes[pos]);
 
     // add double click listener to remove self
     newElement.addEventListener(
@@ -95,6 +102,17 @@ function displayBlockedSite(website) {
                 event.target.parentNode.removeChild(event.target);
                 unblockWebsite(event.target.firstChild.data);
             });
+}
+
+function getPosition(website, textArray) {
+    let pos = 0;
+    if (textArray.length == 0) {
+        return 0;
+    }
+    while (pos < textArray.length && website.localeCompare(textArray[pos]) == 1) {
+        pos += 1;
+    }
+    return pos;
 }
 
 function unblockWebsite(website) {

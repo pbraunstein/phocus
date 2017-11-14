@@ -56,7 +56,8 @@ function addWebsite(website) {
             return;
         }
 
-        items.websites.push(website)
+        items.websites.push(website);
+        items.websites.sort();
         chrome.storage.sync.set({'websites': items.websites});
 
         displayBlockedSite(website);

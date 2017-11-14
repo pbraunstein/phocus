@@ -84,12 +84,12 @@ function websiteValid(website, items) {
 
 function displayBlockedSite(website) {
     let websiteList = getList();
-    let l = websiteList.getElementsByTagName("li");
-    let m = [];
-    for (x of l) {
-        m.push(x.firstChild.data);
+    let liElements = websiteList.getElementsByTagName("li");
+    let textElements = [];
+    for (x of liElements) {
+        textElements.push(x.firstChild.data);
     }
-    pos = getPosition(website, m);
+    pos = getWebsitePosition(website, textElements);
 
     let newElement = document.createElement('li');
     newElement.appendChild(document.createTextNode(website));
@@ -104,7 +104,7 @@ function displayBlockedSite(website) {
             });
 }
 
-function getPosition(website, textArray) {
+function getWebsitePosition(website, textArray) {
     let pos = 0;
     if (textArray.length == 0) {
         return 0;

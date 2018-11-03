@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initialize();
 });
 
+DISALLOWED_PUNCTUATION = ['~', '`', '<', '>', '{', '}', '@', '#', '$', '%',
+    '^', '&', '*', '(', ')', '-', '_', '+', '=', '\\', '[', ']', '"', '\'']
+
 function initialize() {
     // initialize click listener
     getCheckbox().addEventListener('change',
@@ -70,14 +73,18 @@ function addWebsite(website) {
 function websiteValid(website, items) {
     // has tld
     if (!website.includes('.com')) {
-        console.log('block');
         return false;
     }
 
     // duplicate detection
     for (site of items.websites) {
         if (site === website) {
-            console.log('block2');
+            return false;
+        }
+    }
+
+    for (disallowed of DISALLOWED_PUNCTUATION) {
+        if (website.includes(disallowed)) {
             return false;
         }
     }
@@ -95,6 +102,7 @@ function displayBlockedSite(website) {
     pos = getWebsitePosition(website, textElements);
 
     let newElement = document.createElement('li');
+    newElement.title = 'double click to remove ' + String(website);
     newElement.appendChild(document.createTextNode(website));
     websiteList.insertBefore(newElement, websiteList.childNodes[pos]);
 

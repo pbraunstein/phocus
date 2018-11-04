@@ -94,15 +94,15 @@ function websiteValid(website, items) {
 
 function displayBlockedSite(website) {
     let websiteList = getList();
-    let liElements = websiteList.getElementsByTagName("li");
+    let blockedWebsites = websiteList.children;
     let textElements = [];
-    for (x of liElements) {
+    for (x of blockedWebsites) {
         textElements.push(x.firstChild.data);
     }
     pos = getWebsitePosition(website, textElements);
 
-    let newElement = document.createElement('li');
-    newElement.title = 'double click to remove ' + String(website);
+    let newElement = document.createElement('div');
+    newElement.title = 'double click to remove ' + website;
     newElement.appendChild(document.createTextNode(website));
     websiteList.insertBefore(newElement, websiteList.childNodes[pos]);
 

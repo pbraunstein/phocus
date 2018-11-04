@@ -1,0 +1,17 @@
+.blocked-website-row {
+    font-size: large;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.blocked-website-text {
+}
+
+.blocked-website-close-button {
+    margin-right: 5px;
+    float: right;
+}
+
+.blocked-website-close-button:hover {
+    font-weight: bold;
+}

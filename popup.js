@@ -101,17 +101,32 @@ function displayBlockedSite(website) {
     }
     pos = getWebsitePosition(website, textElements);
 
-    let newElement = document.createElement('div');
-    newElement.title = 'double click to remove ' + website;
+    let wrapperElement = document.createElement('div');
+    wrapperElement.className = 'blocked-website-row'
+    let newElement = document.createElement('span');
     newElement.appendChild(document.createTextNode(website));
-    websiteList.insertBefore(newElement, websiteList.childNodes[pos]);
+    newElement.className = 'blocked-website-text'
+    let closeButton = document.createElement('span');
+    closeButton.appendChild(document.createTextNode('x'));
+    closeButton.className = 'blocked-website-close-button'
+    wrapperElement.appendChild(newElement);
+    wrapperElement.appendChild(closeButton);
+    websiteList.insertBefore(wrapperElement, websiteList.childNodes[pos]);
 
     // add double click listener to remove self
-    newElement.addEventListener(
-            'dblclick',
+    closeButton.addEventListener(
+            'click',
             (event) => {
-                event.target.parentNode.removeChild(event.target);
-                unblockWebsite(event.target.firstChild.data);
+                let parentNode = event.target.parentElement;
+                let websiteToUnblock = '';
+                for (let child of parentNode.children) {
+                    if (child.className === 'blocked-website-text') {
+                        websiteToUnblock = child.firstChild.data;
+                    }
+                    parentNode.removeChild(child);
+                }
+                parentNode.parentElement.removeChild(parentNode);
+                unblockWebsite(websiteToUnblock);
             });
 }
 

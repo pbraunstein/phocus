@@ -9,7 +9,7 @@ function initialize() {
     // initialize click listener
     getCheckbox().addEventListener('change',
         function () {
-            if (activatedCheckbox.checked) {
+            if (this.checked) {
                 chrome.storage.sync.set({'active': true});
             } else {
                 chrome.storage.sync.set({'active': false});
@@ -143,21 +143,21 @@ function unblockWebsite(website) {
 }
 
 function getCheckbox() {
-    return document.querySelector('#activatedCheckbox');
+    return document.querySelector('#activated-checkbox');
 }
 
 function getList() {
-    return document.querySelector('#websiteList');
+    return document.querySelector('#website-list');
 }
 
 function getTextBox() {
-    return document.querySelector('#entryTextBox');
+    return document.querySelector('#entry-text-box');
 }
 
 function getSubmit() {
-    return document.querySelector('#entrySubmit');
+    return document.querySelector('#entry-submit');
 }
 
 function getClearAll() {
-    return document.querySelector('#clearAll');
+    return document.querySelector('#clear-all');
 }

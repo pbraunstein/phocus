@@ -22,7 +22,7 @@ function main() {
 function blockWebsite() {
     let div = document.createElement('div');
     document.body.appendChild(div);
-    div.className += ' blockPhocus';
+    div.className += ' block-phocus';
 }
 
 main();

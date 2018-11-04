@@ -5,11 +5,13 @@
 }
 
 .blocked-website-text {
+    user-select: none;
 }
 
 .blocked-website-close-button {
     margin-right: 5px;
     float: right;
+    user-select: none;
 }
 
 .blocked-website-close-button:hover {

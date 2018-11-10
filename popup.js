@@ -5,9 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
 DISALLOWED_PUNCTUATION = ['~', '`', '<', '>', '{', '}', '@', '#', '$', '%',
     '^', '&', '*', '(', ')', '-', '_', '+', '=', '\\', '[', ']', '"', '\'']
 
+let TAB_KEY_CODE = 9;
+
 function initialize() {
+    let checkBox = getCheckbox();
+    let clearAllButton = getClearAll();
     // initialize click listener
-    getCheckbox().addEventListener('change',
+    checkBox.addEventListener('change',
         function () {
             if (this.checked) {
                 chrome.storage.sync.set({'active': true});
@@ -29,7 +33,7 @@ function initialize() {
         });
 
     // initialize clear all button
-    getClearAll().addEventListener('click',
+    clearAllButton.addEventListener('click',
         function () {
             chrome.storage.sync.clear();
             let ul = getList();
@@ -37,6 +41,21 @@ function initialize() {
                ul.removeChild(ul.lastChild);
             }
         });
+
+    // trap focus within chrome extension
+    // screen reader users can exit with esc button
+    checkBox.addEventListener('keydown', (event) => {
+        if (event.keyCode === TAB_KEY_CODE && event.shiftKey === true) {
+            event.preventDefault();
+            clearAllButton.focus();
+        }
+    });
+    clearAllButton.addEventListener('keydown', (event) => {
+        if (event.keyCode === TAB_KEY_CODE && event.shiftKey === false) {
+            event.preventDefault();
+            checkBox.focus();
+        }
+    });
 }
 
 function pullFromStorage() {

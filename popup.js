@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
 DISALLOWED_PUNCTUATION = ['~', '`', '<', '>', '{', '}', '@', '#', '$', '%',
     '^', '&', '*', '(', ')', '-', '_', '+', '=', '\\', '[', ']', '"', '\'']
 
-let TAB_KEY_CODE = 9;
+const TAB_KEY_CODE = 9;
 
 function initialize() {
-    let checkBox = getCheckbox();
-    let clearAllButton = getClearAll();
+    const checkBox = getCheckbox();
+    const clearAllButton = getClearAll();
     // initialize click listener
     checkBox.addEventListener('change',
         function () {
@@ -36,7 +36,7 @@ function initialize() {
     clearAllButton.addEventListener('click',
         function () {
             chrome.storage.sync.clear();
-            let ul = getList();
+            const ul = getList();
             while (ul.lastChild) {
                ul.removeChild(ul.lastChild);
             }
@@ -112,20 +112,20 @@ function websiteValid(website, items) {
 }
 
 function displayBlockedSite(website) {
-    let websiteList = getList();
-    let blockedWebsites = websiteList.children;
-    let textElements = [];
+    const websiteList = getList();
+    const blockedWebsites = websiteList.children;
+    const textElements = [];
     for (x of blockedWebsites) {
         textElements.push(x.firstChild.data);
     }
     pos = getWebsitePosition(website, textElements);
 
-    let wrapperElement = document.createElement('div');
+    const wrapperElement = document.createElement('div');
     wrapperElement.className = 'blocked-website-row'
-    let newElement = document.createElement('span');
+    const newElement = document.createElement('span');
     newElement.appendChild(document.createTextNode(website));
     newElement.className = 'blocked-website-text'
-    let closeButton = document.createElement('span');
+    const closeButton = document.createElement('span');
     closeButton.appendChild(document.createTextNode('x'));
     closeButton.className = 'blocked-website-close-button'
     closeButton.setAttribute('aria-label', 'remove ' + website);
@@ -148,7 +148,7 @@ function displayBlockedSite(website) {
 }
 
 function handleCloseButtonClick(event) {
-    let parentNode = event.target.parentElement;
+    const parentNode = event.target.parentElement;
     let websiteToUnblock = '';
     for (let child of parentNode.children) {
         if (child.className === 'blocked-website-text') {

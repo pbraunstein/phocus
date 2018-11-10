@@ -9,7 +9,7 @@ function main() {
             return;
         }
         websites_to_block = items.websites;
-        let currentWebsite = location.href;
+        const currentWebsite = location.href;
         for (let website of websites_to_block) {
             if (currentWebsite.includes(website)) {
                 blockWebsite();
@@ -20,7 +20,7 @@ function main() {
 }
 
 function blockWebsite() {
-    let div = document.createElement('div');
+    const div = document.createElement('div');
     document.body.appendChild(div);
     div.className += ' block-phocus';
 }

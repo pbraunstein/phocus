@@ -109,25 +109,36 @@ function displayBlockedSite(website) {
     let closeButton = document.createElement('span');
     closeButton.appendChild(document.createTextNode('x'));
     closeButton.className = 'blocked-website-close-button'
+    closeButton.setAttribute('aria-label', 'remove ' + website);
+    closeButton.setAttribute('tabindex', '0');
+    closeButton.setAttribute('role', 'button');
     wrapperElement.appendChild(newElement);
     wrapperElement.appendChild(closeButton);
     websiteList.insertBefore(wrapperElement, websiteList.childNodes[pos]);
 
-    // add double click listener to remove self
+    // add click listener to remove self
     closeButton.addEventListener(
-            'click',
-            (event) => {
-                let parentNode = event.target.parentElement;
-                let websiteToUnblock = '';
-                for (let child of parentNode.children) {
-                    if (child.className === 'blocked-website-text') {
-                        websiteToUnblock = child.firstChild.data;
-                    }
-                    parentNode.removeChild(child);
-                }
-                parentNode.parentElement.removeChild(parentNode);
-                unblockWebsite(websiteToUnblock);
-            });
+            'click', handleCloseButtonClick);
+
+    closeButton.addEventListener('keydown', (event) => {
+        // Only trigger click when space or enter is keyed
+        if (event.keyCode === 13 || event.keyCode == 32) {
+            handleCloseButtonClick(event);
+        }
+    });
+}
+
+function handleCloseButtonClick(event) {
+    let parentNode = event.target.parentElement;
+    let websiteToUnblock = '';
+    for (let child of parentNode.children) {
+        if (child.className === 'blocked-website-text') {
+            websiteToUnblock = child.firstChild.data;
+        }
+        parentNode.removeChild(child);
+    }
+    parentNode.parentElement.removeChild(parentNode);
+    unblockWebsite(websiteToUnblock);
 }
 
 function getWebsitePosition(website, textArray) {

@@ -6,6 +6,8 @@ DISALLOWED_PUNCTUATION = ['~', '`', '<', '>', '{', '}', '@', '#', '$', '%',
     '^', '&', '*', '(', ')', '-', '_', '+', '=', '\\', '[', ']', '"', '\'']
 
 const TAB_KEY_CODE = 9;
+const ENTER_KEY_CODE = 13;
+const SPACE_KEY_CODE = 32;
 
 function initialize() {
     const checkBox = getCheckbox();
@@ -141,7 +143,7 @@ function displayBlockedSite(website) {
 
     closeButton.addEventListener('keydown', (event) => {
         // Only trigger click when space or enter is keyed
-        if (event.keyCode === 13 || event.keyCode == 32) {
+        if (event.keyCode === SPACE_KEY_CODE || event.keyCode == ENTER_KEY_CODE) {
             handleCloseButtonClick(event);
         }
     });
